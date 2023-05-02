@@ -1,14 +1,14 @@
-import { Fragment } from "react";
-
-import avocadoImage from "../../assets/avocado.jpg";
 import classes from "./Header.module.css";
+import avocadoImage from "../../assets/avocado.jpg";
+
+import HeaderCartButton from "./HeaderCartButton";
 
 const Header = (props) => {
   return (
     <>
       <header className={classes.header}>
-        <h1>Avocados and More</h1>
-        <button>Cart</button>
+        <h1>AVOCADOOR</h1>
+        <HeaderCartButton />
       </header>
       <div className={classes["main-image"]}>
         <img src={avocadoImage} alt="An image of a avocado" />
