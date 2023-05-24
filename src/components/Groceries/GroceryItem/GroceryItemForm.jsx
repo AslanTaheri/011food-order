@@ -10,18 +10,14 @@ const GroceryItemForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const enteredAmount = amountInputRef.current.value;
-    const enteredAmountNumber = +enteredAmount;
+    const enteredAmount = +amountInputRef.current.value;
 
-    if (
-      enteredAmount.trim().length === 0 ||
-      enteredAmountNumber < 1 ||
-      enteredAmountNumber > 10
-    ) {
+    if (enteredAmount < 1 || enteredAmount > 10) {
       setAmountIsValid(false);
       return;
     }
-    props.onAddToCart(enteredAmountNumber);
+
+    props.onAddToCart(enteredAmount);
   };
 
   return (
