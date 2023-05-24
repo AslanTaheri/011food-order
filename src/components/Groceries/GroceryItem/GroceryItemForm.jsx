@@ -18,6 +18,7 @@ const GroceryItemForm = (props) => {
     }
 
     props.onAddToCart(enteredAmount);
+    setAmountIsValid(true);
   };
 
   return (
