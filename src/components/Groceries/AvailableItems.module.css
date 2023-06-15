@@ -5,6 +5,16 @@
   animation: items-appear 1s ease-out forwards;
 }
 
+.itemsLoading {
+  text-align: center;
+  color: white;
+}
+
+.itemsError {
+  text-align: center;
+  color: red;
+}
+
 .items ul {
   list-style: none;
   margin: 0;

@@ -5,11 +5,20 @@ import GroceryItem from "./GroceryItem/GroceryItem";
 
 const AvailableItems = () => {
   const [groceries, setGroceries] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [requestError, setRequestError] = useState();
+
   useEffect(() => {
     const fetchBasket = async () => {
+      setIsLoading(true);
       const response = await fetch(
         "https://avocadoor-9ad68-default-rtdb.firebaseio.com/vegetables.json"
       );
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
       const responseData = await response.json();
       const loadedItems = [];
       for (const key in responseData) {
@@ -21,9 +30,30 @@ const AvailableItems = () => {
         });
       }
       setGroceries(loadedItems);
+      setIsLoading(false);
     };
-    fetchBasket();
+
+    fetchBasket().catch((error) => {
+      setIsLoading(false);
+      setRequestError(error.message);
+    });
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.itemsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (requestError) {
+    return (
+      <section className={classes.itemsError}>
+        <p>{requestError}</p>
+      </section>
+    );
+  }
 
   const items = groceries.map((item) => (
     <GroceryItem
